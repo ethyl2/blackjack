@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blackjack</title>
+    <link href="https://fonts.googleapis.com/css?family=Cuprum|PT+Sans" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- Favicon is from http://www.freefavicon.com/freefavicons/objects/iconinfo/lattice-optic-illusion-152-204321.html-->
+    <link rel="icon" type="image/png" href="img/lattice.png">
+  </head>
+
+  <body>
+    <header>
+      <h1>Let's Play Blackjack!</h1>
+      <hr>
+    </header>
+    <div id="main">
+      <h2>Click the deck to reveal your cards:</h2>
+      <h3 id="hdrTotal"></h3><h3 id="hdrResult"></h3>
+      <div id="my_hand">
+      </div>
+      <div id="controls">
+        <div id="btnDeal">
+          <img src="img/deck_small.jpg" alt="deck deal button" onclick="dealTwo()">
+        </div>
+        <div id="btnHit">
+          <img src="img/deck_small.jpg" alt="hit button" onclick="hit()">
+        </div>
+        <div id="btnStick">
+          <img src="img/stick_small.jpg" alt="stick" onclick="stick()">
+        </div>
+        <div id="btnRestart">
+          <img src="img/restart_small.jpg" alt="restart button" onclick="restart()">
+        </div>
+      </div>
+
+      <div id="result">
+        <img src="" id="imgResult">
+      </div>
+    </div>
+
+
+
+    <script src="js/jquery-2.2.4.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+
+</html>
