@@ -47,3 +47,9 @@ header {
 	height: 250px;
   opacity: 0.75;
 }
+
+#userWins, #dealerWins {
+  display: inline;
+  font-style: italic;
+  text-align: right;
+}

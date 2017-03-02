@@ -46,6 +46,8 @@ function Game() {
   this.usersHand = new Hand();
   this.dealersHand = new Hand();
   this.outcome = "";
+  this.numUserWins = 0;
+  this.numDealerWins = 0;
 
   this.init = function() {
     $("#result").css("display", "none");
@@ -150,9 +152,13 @@ function Game() {
     $("#result").css("display", "inline");
     if (this.outcome === "win" || this.outcome === "tie") {
       $("#imgResult").attr("src", "img/check.png");
+      this.numUserWins++;
     } else {
       $("#imgResult").attr("src", "img/x2.png");
+      this.numDealerWins++;
     }
+    $("#userWins").html("Total Games Won: " + this.numUserWins);
+    $("#dealerWins").html("Total Games Lost: " + this.numDealerWins);
   }
 
 }; // end of Game constructor
