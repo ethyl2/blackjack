@@ -13,8 +13,8 @@ header {
 #my_hand {
   clear: both;
   border: 1px solid grey;
-  height: 250px;
-  width: 835px;
+  height: 22em;
+  width: 90%;
 }
 
 #h3 {
@@ -26,7 +26,6 @@ header {
   float: left;
 }
 
-#btnHit, #btnStick, #btnRestart {
-  display: none;
+#btnHit, #btnStick, #btnRestart, #btnDeal {
   float: left;
 }

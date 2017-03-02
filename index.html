@@ -17,26 +17,16 @@
     </header>
     <div id="main">
       <h2>Click the deck to reveal your cards:</h2>
-      <h3 id="hdrTotal"></h3><h3 id="hdrResult"></h3>
       <div id="my_hand">
+        <h3 id="hdrTotal"></h3><h3 id="hdrResult"></h3>
       </div>
       <div id="controls">
         <div id="btnDeal">
-          <img src="img/deck_small.jpg" alt="deck deal button" onclick="dealTwo()">
-        </div>
-        <div id="btnHit">
-          <img src="img/deck_small.jpg" alt="hit button" onclick="hit()">
+          <img src="img/deck_small.jpg" alt="deck deal button" onclick="game.deal()">
         </div>
         <div id="btnStick">
-          <img src="img/stick_small.jpg" alt="stick" onclick="stick()">
+          <img src="img/stick_small.jpg" alt="stick button" onclick="game.stick()">
         </div>
-        <div id="btnRestart">
-          <img src="img/restart_small.jpg" alt="restart button" onclick="restart()">
-        </div>
-      </div>
-
-      <div id="result">
-        <img src="" id="imgResult">
       </div>
     </div>
 
