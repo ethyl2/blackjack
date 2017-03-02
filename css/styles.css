@@ -26,11 +26,24 @@ header {
   float: left;
 }
 
-#btnHit, #btnStick, #btnDeal {
+#btnStick, #btnDeal {
   float: left;
 }
 
 #btnRestart {
   float: right;
   font-size: 2em;
+}
+
+#result {
+  display: none;
+  position: absolute;
+	top: 40%;
+	left: 10%;
+}
+
+#result > img {
+	width: 500px;
+	height: 250px;
+  opacity: 0.75;
 }

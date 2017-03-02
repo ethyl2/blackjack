@@ -2,7 +2,7 @@ function Card(myName, mySuit, myValue) {
   this.name = myName;
   this.suit = mySuit;
   this.value = myValue;
-}
+};
 
 var cardDeck = {
   allCards: [],
@@ -24,7 +24,7 @@ var cardDeck = {
       }
     }
   }
-};
+}; // end cardDeck object
 
 function Hand() {
   this.cards = [];
@@ -45,9 +45,13 @@ function Hand() {
 function Game() {
   this.usersHand = new Hand();
   this.dealersHand = new Hand();
+  this.outcome = "";
 
   this.init = function() {
+    $("#result").css("display", "none");
     cardDeck.populateDeck();
+    this.deal();
+    this.deal();
   };
 
   this.hit = function(player) {
@@ -87,37 +91,42 @@ function Game() {
   this.stick = function() {
     if (this.usersHand.currentTotal == 21) {
       $("#hdrResult").html("Blackjack! You win!");
+      this.outcome = "win";
     } else if (this.dealersHand.currentTotal > 21 && this.usersHand.currentTotal <= 21) {
       $("#hdrResult").html("You win! The dealer went over with a score of " +
         this.dealersHand.currentTotal + ".");
+      this.outcome = "win";
     } else if (this.usersHand.currentTotal > 21) {
       $("#hdrResult").html("You lose since you went over 21. Try again.");
+      this.outcome = "lost";
     } else if (this.usersHand.currentTotal > this.dealersHand.currentTotal) {
       $("#hdrResult").html("Stick! Dealer's score is only " +
         this.dealersHand.currentTotal +  ". So you are a winner!");
+      this.outcome = "win";
     } else if (this.dealersHand.currentTotal === this.usersHand.currentTotal) {
       $("#hdrResult").html("Tie!");
+      this.outcome = "tie";
     } else {
       $("#hdrResult").html("You lose since the dealer got a higher score than you -- a " +
       this.dealersHand.currentTotal + ".");
+      this.outcome = "lost";
     }
-    $("#btnDeal").css("display", "none");
-    $("#btnStick").css("display", "none");
+    this.displayEnd();
   };
 
   this.score = function() {
     if (this.usersHand.currentTotal > 21) {
       $("#hdrResult").html("BUST! Try again.");
-      $("#btnDeal").css("display", "none");
-      $("#btnStick").css("display", "none");
+      this.outcome = "lost";
+      this.displayEnd();
     } else if (this.usersHand.currentTotal == 21) {
       $("#hdrResult").html("Blackjack! Winner!");
-      $("#btnDeal").css("display", "none");
-      $("#btnStick").css("display", "none");
+      this.outcome = "win";
+      this.displayEnd();
     } else if (this.usersHand.currentTotal < 21 && this.usersHand.cards.length == 5){
       $("#hdrResult").html("5 card trick! Winner!");
-      $("#btnDeal").css("display", "none");
-      $("#btnStick").css("display", "none");
+      this.outcome = "win";
+      this.displayEnd();
     } else {
       $("#hdrResult").html("Keep going?");
     }
@@ -132,7 +141,19 @@ function Game() {
     $("#hdrResult").html("");
     $("#btnDeal").css("display", "inline");
     $("#btnStick").css("display", "inline");
+    this.init();
   };
+
+  this.displayEnd = function() {
+    $("#btnDeal").css("display", "none");
+    $("#btnStick").css("display", "none");
+    $("#result").css("display", "inline");
+    if (this.outcome === "win" || this.outcome === "tie") {
+      $("#imgResult").attr("src", "img/check.png");
+    } else {
+      $("#imgResult").attr("src", "img/x2.png");
+    }
+  }
 
 }; // end of Game constructor
 
