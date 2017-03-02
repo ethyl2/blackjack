@@ -4,7 +4,6 @@ function Card(myName, mySuit, myValue) {
   this.value = myValue;
 }
 
-// Setting up the deck.
 var cardDeck = {
   allCards: [],
   suits: ["Hearts", "Diamonds", "Spades", "Clubs"],
@@ -18,7 +17,7 @@ var cardDeck = {
       }
     }
     // The specifications indicate that aces should be always worth 11 instead
-    // of 1 in this version of the game. To change those values:
+    // of 1 in this version of the game. To correct those values:
     for (var i = 0; i < this.allCards.length; i++) {
       if (this.allCards[i].name == "Ace") {
         this.allCards[i].value += 10;
@@ -36,33 +35,21 @@ function Hand() {
     for (var i = 0; i < this.cards.length; i++) {
       this.currentTotal += this.cards[i].value;
     }
-  }
+  };
 
   this.displayCardTotal = function() {
     $("#hdrTotal").html("Total value: " + this.currentTotal);
-  }
-
-  this.scoreHand = function() {
-    if (this.currentTotal > 21) {
-      $("#hdrResult").html("BUST!");
-    } else if (this.currentTotal == 21) {
-      $("#hdrResult").html("Blackjack! Winner!");
-    } else if (this.currentTotal < 21 && this.cards.length == 5){
-      $("#hdrResult").html("5 card trick! Winner!");
-    } else {
-      //keep playing
-    }
-  }
-};
-
-// Initiating a game
+  };
+}; //end Hand constructor
 
 function Game() {
   this.usersHand = new Hand();
   this.dealersHand = new Hand();
+
   this.init = function() {
     cardDeck.populateDeck();
-  }
+  };
+
   this.hit = function(player) {
     var goodCard = false;
     do {
@@ -89,32 +76,73 @@ function Game() {
     goodCard = false;
     this.usersHand.sumCardTotal();
     this.usersHand.displayCardTotal();
-    this.usersHand.scoreHand();
+    this.score();
   };
+
   this.deal = function() {
     this.hit('user');
     this.hit('dealer');
   };
+
   this.stick = function() {
-    if (this.dealersHand.currentTotal > 21) {
+    if (this.usersHand.currentTotal == 21) {
+      $("#hdrResult").html("Blackjack! You win!");
+    } else if (this.dealersHand.currentTotal > 21 && this.usersHand.currentTotal <= 21) {
       $("#hdrResult").html("You win! The dealer went over with a score of " +
         this.dealersHand.currentTotal + ".");
     } else if (this.usersHand.currentTotal > 21) {
       $("#hdrResult").html("You lose since you went over 21. Try again.");
     } else if (this.usersHand.currentTotal > this.dealersHand.currentTotal) {
       $("#hdrResult").html("Stick! Dealer's score is only " +
-        this.dealersHand.currentTotal +  ".So you are a winner!");
+        this.dealersHand.currentTotal +  ". So you are a winner!");
     } else if (this.dealersHand.currentTotal === this.usersHand.currentTotal) {
       $("#hdrResult").html("Tie!");
     } else {
       $("#hdrResult").html("You lose since the dealer got a higher score than you -- a " +
       this.dealersHand.currentTotal + ".");
     }
-  }
-};
+    $("#btnDeal").css("display", "none");
+    $("#btnStick").css("display", "none");
+  };
 
-var game = new Game();
-game.init();
+  this.score = function() {
+    if (this.usersHand.currentTotal > 21) {
+      $("#hdrResult").html("BUST! Try again.");
+      $("#btnDeal").css("display", "none");
+      $("#btnStick").css("display", "none");
+    } else if (this.usersHand.currentTotal == 21) {
+      $("#hdrResult").html("Blackjack! Winner!");
+      $("#btnDeal").css("display", "none");
+      $("#btnStick").css("display", "none");
+    } else if (this.usersHand.currentTotal < 21 && this.usersHand.cards.length == 5){
+      $("#hdrResult").html("5 card trick! Winner!");
+      $("#btnDeal").css("display", "none");
+      $("#btnStick").css("display", "none");
+    } else {
+      $("#hdrResult").html("Keep going?");
+    }
+  };
+
+  this.restart = function() {
+    this.usersHand = new Hand();
+    this.dealersHand = new Hand();
+    cardDeck.usedCards = [];
+    $("#my_hand").empty();
+    $("#hdrTotal").html("");
+    $("#hdrResult").html("");
+    $("#btnDeal").css("display", "inline");
+    $("#btnStick").css("display", "inline");
+  };
+
+}; // end of Game constructor
+
+var game;
+
+$(document).ready(function() {
+   game = new Game();
+   game.init();
+ }
+)
 
 function getRandom(num) {
   return Math.floor(Math.random() * num);

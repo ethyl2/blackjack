@@ -12,14 +12,15 @@
 
   <body>
     <header>
+      <button id="btnRestart" onclick="game.restart()">Restart</button>
       <h1>Let's Play Blackjack!</h1>
       <hr>
     </header>
     <div id="main">
-      <h2>Click the deck to reveal your cards:</h2>
-      <div id="my_hand">
-        <h3 id="hdrTotal"></h3><h3 id="hdrResult"></h3>
-      </div>
+      <h2>Click the deck to reveal your cards. Click on the green hat guy
+        to stick and end the game.</h2>
+      <h3 id="hdrTotal"></h3><h3 id="hdrResult"></h3>
+      <div id="my_hand"></div>
       <div id="controls">
         <div id="btnDeal">
           <img src="img/deck_small.jpg" alt="deck deal button" onclick="game.deal()">
