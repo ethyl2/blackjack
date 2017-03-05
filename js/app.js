@@ -20,7 +20,7 @@ var cardDeck = {
     // of 1 in this version of the game. To correct those values:
     for (var i = 0; i < this.allCards.length; i++) {
       if (this.allCards[i].name == "Ace") {
-        this.allCards[i].value += 10;
+        this.allCards[i].value = 11;
       }
     }
   }
@@ -67,6 +67,7 @@ function Game() {
         // If player is user, add to users' hand
         if (player === "user") {
           this.usersHand.cards.push(card);
+          //Display card
           var $myHandContent = $("<div>");
           $myHandContent.addClass("current_hand").appendTo("#my_hand");
           var imageUrl = "img/cards/" + card.suit + "/" + card.name + ".jpg";
@@ -82,12 +83,13 @@ function Game() {
     goodCard = false;
     this.usersHand.sumCardTotal();
     this.usersHand.displayCardTotal();
-    this.score();
+    //this.score();
   };
 
   this.deal = function() {
     this.hit('user');
     this.hit('dealer');
+    this.score();
   };
 
   this.stick = function() {
@@ -138,6 +140,7 @@ function Game() {
     this.usersHand = new Hand();
     this.dealersHand = new Hand();
     cardDeck.usedCards = [];
+    this.outcome = "";
     $("#my_hand").empty();
     $("#hdrTotal").html("");
     $("#hdrResult").html("");
@@ -153,7 +156,7 @@ function Game() {
     if (this.outcome === "win" || this.outcome === "tie") {
       $("#imgResult").attr("src", "img/check.png");
       this.numUserWins++;
-    } else {
+    } else if (this.outcome === "lost") {
       $("#imgResult").attr("src", "img/x2.png");
       this.numDealerWins++;
     }
