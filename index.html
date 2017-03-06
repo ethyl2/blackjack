@@ -12,10 +12,43 @@
 
   <body>
     <header>
+      <button id="btnRules" onclick="game.displayRules()">Rules</button>
       <button id="btnRestart" onclick="game.restart()">Restart</button>
       <h1>Let's Play Blackjack!</h1>
       <hr>
     </header>
+
+  <!-- The Modal -->
+  <div id="rulesModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close" onclick="game.closeModal()">&times;</span>
+      <h2>Rules:</h2>
+      <ol>
+        <li>Ace is always high (equaling 11, not 1).</li>
+        <li>The game begins with both the player and the dealer receiving 2 cards.</li>
+        <li>If a player's cards add up to <em>more than 21</em>, then she/he is
+          <strong>bust</strong> and <span class="lose">loses</span>.</li>
+        <li>If a player's cards add up to <em>exactly 21</em>, then she/he gets
+          a <strong>blackjack</strong> and <span class="win">wins!</span></li>
+        <li>If a player has been dealt <em>5 cards</em>, and those cards add up
+          to <em>less than 21</em>, the player <span class="win">wins</span>
+          because of a <strong>"5 card trick!"</strong></li>
+        <li>If a player's cards add up to <em>less than 21</em>, he/she has
+          <strong>2 options:</strong>
+          <ol>
+            <li> He/she may get another card, which automatically causes the dealer
+              to also get another card, or</li>
+            <li> He/she may choose to stick, ending the game. When stick
+              is chosen, if his/her cards add up to more than the dealer's cards'
+              total, he/she <span class="win">wins!</span></li>
+            </ol>
+        </li>
+      </ol>
+    </div>
+  </div>
+
     <div id="main">
       <h2>Click on the deck to get another card. Click on the green hat guy
         to stick and end the game.</h2>

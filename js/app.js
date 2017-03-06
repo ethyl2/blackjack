@@ -164,6 +164,16 @@ function Game() {
     $("#dealerWins").html("Total Games Lost: " + this.numDealerWins);
   }
 
+  // When the user clicks on the button, open the modal
+  this.displayRules = function() {
+    $("#rulesModal").css("display","block");
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  this.closeModal = function() {
+    $("#rulesModal").css("display", "none");
+  }
+
 }; // end of Game constructor
 
 var game;
