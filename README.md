@@ -1,4 +1,7 @@
 #Sweet and Simple Blackjack with jQuery
+
+https://ethyl2.github.io/blackjack/
+
 ---------------------------
 
 This is a straightforward game of [Blackjack](https://en.wikipedia.org/wiki/Blackjack).
